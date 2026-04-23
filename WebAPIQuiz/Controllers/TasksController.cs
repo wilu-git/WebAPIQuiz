@@ -25,7 +25,9 @@ namespace WebAPIQuiz.Controllers
         [HttpPost("tasks")]
         public IActionResult CreateTask([FromBody] Models.TaskItem task)
         {
-            return Ok("Task Created");
+            task.Id = tasks.Max(t => t.Id) + 1;
+            tasks.Add(task);
+            return CreatedAtAction(nameof(GetTaskById), new { id = task.Id }, task);
         }
 
         [HttpGet("tasks/{id}")]

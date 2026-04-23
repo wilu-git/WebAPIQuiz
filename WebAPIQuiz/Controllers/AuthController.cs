@@ -25,15 +25,35 @@ namespace WebAPIQuiz.Controllers
 
         [HttpPost("Login")]
         [APIKeyAuthorize]
-        public IActionResult Login([FromBody]LoginModel model)
+        public IActionResult Login([FromHeader(Name = "X-API-KEY")] string apiKey, [FromBody] LoginModel model)
         {
             var user = users.FirstOrDefault(u => u.Username == model.Username && u.Password == model.Password);
             if (user != default)
             {
                 var token = _jwtService.GenerateToken(user.Username, user.Role);
 
-                return Ok(new 
-                { 
+                return Ok(new
+                {
+                    token,
+                    username = user.Username,
+                    role = user.Role
+                });
+            }
+            else
+            {
+                return Unauthorized("Invalid username or password");
+            }
+        }
+        [HttpPost("refresh")]
+        [APIKeyAuthorize]
+        public IActionResult RefreshToken([FromHeader(Name = "X-API-KEY")] string apiKey, [FromBody] LoginModel model)
+        {
+            var user = users.FirstOrDefault(u => u.Username == model.Username && u.Password == model.Password);
+            if (user != default)
+            {
+                var token = _jwtService.GenerateToken(user.Username, user.Role);
+                return Ok(new
+                {
                     token,
                     username = user.Username,
                     role = user.Role
