@@ -1,0 +1,28 @@
+@WebAPIQuiz_HostAddress = http://localhost:5105
+
+GET {{WebAPIQuiz_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+POST {{WebAPIQuiz_HostAddress}}/api/Auth/Login
+Content-Type: application/json
+X-API-KEY: MYAPIKEY12345
+
+{
+  "username": "admin",
+  "password": "1234"
+}
+
+###
+
+GET {{WebAPIQuiz_HostAddress}}/api/Tasks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTc3Njk0OTI0M30.2bfBe_DUqMQUVNXcrQZCRqWy9P5g4SR0qrsLrL20g60
+###
+
+POST{{WebAPIQuiz_HostAddress}}/api/Tasks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTc3Njk0OTI0M30.2bfBe_DUqMQUVNXcrQZCRqWy9P5g4SR0qrsLrL20g60
+{
+  "id": 1,
+  "title": "",
+  "isCompleted": true
+}
